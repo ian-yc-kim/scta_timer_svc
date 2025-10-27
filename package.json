@@ -1,0 +1,19 @@
+{
+  "name": "scta_timer_svc",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "lint": "eslint . --ext .ts,.tsx",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "jsdom": "^21.1.2",
+    "typescript": "^5.9.3",
+    "vite": "^4.5.14",
+    "vitest": "^1.6.1"
+  }
+}
