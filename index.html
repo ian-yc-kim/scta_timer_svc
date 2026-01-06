@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Steampunk Timer - Gear Animation Demo</title>
+    <link rel="stylesheet" href="/src/styles/gearAnimations.css" />
+    <style>
+      /* Minimal demo visuals - inline so animation CSS remains focused */
+      .demo-row { display: flex; gap: 24px; align-items: center; padding: 24px; }
+      .gear-demo { width: 96px; height: 96px; border-radius: 50%;
+                  border: 8px solid #6b4f2b; background: radial-gradient(circle at 30% 30%, #a07a4b, #6b4f2b);
+                  box-shadow: 0 4px 0 rgba(0,0,0,0.15) inset; display:flex; align-items:center; justify-content:center; }
+      .label { font-family: system-ui, sans-serif; font-size: 14px; color:#333; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 style="font-family: system-ui, sans-serif; padding: 24px;">Gear Animation Demo</h1>
+      <section class="demo-row">
+        <!-- Default: paused gear (no running class) -->
+        <div>
+          <div class="gear gear-demo" style="--gear-rotation-speed: 8s; --gear-rotation-direction: normal; --gear-initial-rotation: 0deg;"></div>
+          <div class="label">Paused (default)</div>
+        </div>
+
+        <!-- Running gear: demonstrates GPU-accelerated continuous rotation -->
+        <div>
+          <div class="gear running gear-demo" style="--gear-rotation-speed: 4s; --gear-rotation-direction: reverse;"></div>
+          <div class="label">Running (fast, reverse)</div>
+        </div>
+
+        <!-- Resetting gear: snaps to initial rotation -->
+        <div>
+          <div class="gear resetting gear-demo" style="--gear-initial-rotation: 45deg; --gear-rotation-speed: 12s;"></div>
+          <div class="label">Resetting (snapped)</div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

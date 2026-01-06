@@ -1,0 +1,35 @@
+/* Gear animation framework: GPU-accelerated, paused-by-default, reset support */
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.gear {
+  /* animation controls */
+  animation-name: rotate;
+  animation-duration: var(--gear-rotation-speed, 10s);
+  animation-direction: var(--gear-rotation-direction, normal);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  /* default paused state */
+  animation-play-state: paused;
+
+  /* GPU hint */
+  will-change: transform;
+  transform: translateZ(0);
+
+  /* layout helpers */
+  display: inline-block;
+}
+
+.gear.running {
+  animation-play-state: running;
+}
+
+.gear.resetting {
+  /* stop any animation and snap to initial rotation */
+  animation: none !important;
+  transform: rotate(var(--gear-initial-rotation, 0deg));
+}
