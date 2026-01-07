@@ -1,4 +1,4 @@
-import type { TimerState, TimerMode, TimerTickDetail, TimerStateChangeDetail, SessionTransitionDetail } from '../types/timer';
+import type { TimerState, TimerMode, TimerTickDetail, TimerStateChangeDetail, SessionTransitionDetail, TimerResetDetail } from '../types/timer';
 
 export const WORK_DURATION = 1500; // 25 minutes
 export const BREAK_DURATION = 300; // 5 minutes
@@ -38,6 +38,7 @@ const emitter = new TimerEventEmitter();
 
 export const TIMER_TICK = 'timerTick';
 export const TIMER_STATE_CHANGE = 'timerStateChange';
+export const TIMER_RESET = 'timerReset';
 export const SESSION_TRANSITION = 'sessionTransition';
 
 let timerState: TimerState = {
@@ -56,6 +57,11 @@ function emitTimerStateChange() {
   // shallow clone to avoid external mutation
   const payload: TimerStateChangeDetail = { timerState: { ...timerState } };
   emitter.emit<TimerStateChangeDetail>(TIMER_STATE_CHANGE, payload);
+}
+
+function emitTimerReset() {
+  const payload: TimerResetDetail = { timerState: { ...timerState } };
+  emitter.emit<TimerResetDetail>(TIMER_RESET, payload);
 }
 
 function emitSessionTransition() {
@@ -171,6 +177,11 @@ export function resetTimer(): void {
     timerState.mode = 'work';
     timerState.remainingTime = WORK_DURATION;
     timerState.isRunning = false;
+
+    // Emit specific reset event so UI can react distinctly
+    emitTimerReset();
+
+    // Keep backward-compatible state change event
     emitTimerStateChange();
   } catch (error) {
     console.error('timerService:', error);

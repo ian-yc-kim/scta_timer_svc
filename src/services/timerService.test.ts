@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import * as timerService from './timerService';
-import { TIMER_TICK, TIMER_STATE_CHANGE, SESSION_TRANSITION, WORK_DURATION, BREAK_DURATION } from './timerService';
+import { TIMER_TICK, TIMER_STATE_CHANGE, SESSION_TRANSITION, WORK_DURATION, BREAK_DURATION, TIMER_RESET } from './timerService';
 
 vi.useFakeTimers();
 
@@ -106,6 +106,18 @@ describe('timerService core behaviors', () => {
     expect(stateSpy).toHaveBeenCalled();
 
     timerService.off(TIMER_STATE_CHANGE, stateSpy);
+  });
+
+  it('resetTimer also emits TIMER_RESET event', () => {
+    const resetSpy = vi.fn();
+    timerService.on(TIMER_RESET, resetSpy);
+
+    timerService.__testSetRemainingTime(8);
+    timerService.resetTimer();
+
+    expect(resetSpy).toHaveBeenCalled();
+
+    timerService.off(TIMER_RESET, resetSpy);
   });
 
   it('automatic transition from work to break when remainingTime hits zero', () => {

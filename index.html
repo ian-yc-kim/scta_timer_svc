@@ -12,11 +12,20 @@
                   border: 8px solid #6b4f2b; background: radial-gradient(circle at 30% 30%, #a07a4b, #6b4f2b);
                   box-shadow: 0 4px 0 rgba(0,0,0,0.15) inset; display:flex; align-items:center; justify-content:center; }
       .label { font-family: system-ui, sans-serif; font-size: 14px; color:#333; }
+      .control-bar { display:flex; gap:12px; padding: 0 24px 24px 24px; }
+      .control-bar button { padding:8px 12px; font-size:14px; }
     </style>
   </head>
   <body>
     <main>
       <h1 style="font-family: system-ui, sans-serif; padding: 24px;">Gear Animation Demo</h1>
+
+      <div class="control-bar">
+        <button id="start-btn" type="button">Start</button>
+        <button id="pause-btn" type="button">Pause</button>
+        <button id="reset-btn" type="button">Reset</button>
+      </div>
+
       <section class="demo-row">
         <!-- Default: paused gear (no running class) -->
         <div>

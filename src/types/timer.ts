@@ -15,6 +15,11 @@ export interface TimerStateChangeDetail {
   timerState: TimerState;
 }
 
+export interface TimerResetDetail {
+  // include snapshot of timer state at reset
+  timerState: TimerState;
+}
+
 export interface SessionTransitionDetail {
   newMode: TimerMode;
 }
