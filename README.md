@@ -12,6 +12,130 @@ Note: The project uses Vite and the test harness runs with Vitest (jsdom environ
 
 ---
 
+Design System
+
+This Design System section documents the core visual tokens, typography, key CSS classes, and the CSS file structure used across the project. Place this near the top for discoverability and to help contributors quickly adopt consistent styles.
+
+1) Color Palette (design tokens)
+
+The palette is defined as CSS custom properties in src/styles/theme.css.
+
+| Token | Hex / Value | Usage |
+|---|---:|---|
+| --color-brown | #8B4513 | Primary brown tone for accents and borders |
+| --color-brown-dark | #60320d | Darker brown for deep borders/shadows |
+| --color-brown-light | #b07a46 | Lighter brown for muted labels and small text |
+| --color-gold | #FFD700 | Primary highlight color for headings and accents |
+| --color-gold-muted | #d4b300 | Muted gold for body text and buttons |
+| --color-gold-dark | #b38f00 | Dark gold for gradients and depth |
+| --color-copper | #B87333 | Copper midtone for surfaces and gradients |
+| --color-copper-dark | #874b20 | Copper dark for bezels and borders |
+| --color-copper-light | #d29a6b | Copper light for inner gradients |
+| --shadow-deep | 0 8px 24px rgba(0,0,0,0.6) | Deep elevation shadow |
+| --shadow-soft | 0 4px 12px rgba(0,0,0,0.45) | Soft elevation shadow |
+| --highlight-warm | rgba(255, 230, 150, 0.12) | Subtle warm overlay highlight |
+
+Usage example (CSS):
+
+```css
+.button {
+  color: var(--color-brown-dark);
+  background: linear-gradient(180deg, var(--color-gold-muted), var(--color-copper));
+  box-shadow: var(--shadow-soft);
+}
+```
+
+2) Typography
+
+Typography tokens are defined in src/styles/theme.css:
+
+- --font-body: 'Courier Prime', Georgia, 'Times New Roman', serif;
+- --font-heading: Georgia, 'Courier Prime', serif;
+
+Where applied:
+- body uses --font-body (site body copy, labels)
+- h1..h5 use --font-heading (headings with gold color)
+- .label and .label--demo use the body font for small, readable labels
+
+3) Key CSS Classes & Usage
+
+These classes live primarily in src/styles/components.css and src/styles/gearAnimations.css. Use the listed class when indicated to ensure consistent visuals.
+
+- .steampunk-btn — Primary button styling. Use for interactive controls (Start, Pause, Reset). Includes hover, active, and focus-visible states.
+- .clock-face — Main circular bezel container. Use as root for analog/visual clock elements.
+- .panel — Warm, bordered surface utility; use as a generic card/panel wrapper.
+- .label — Muted label text for small annotations.
+- .label--demo — Localized demo label to avoid global .label override; use in demo markup.
+- .control-bar — Container for timer control buttons and small control groups.
+- .demo-row — Layout row for demo gear elements; responsive behavior included.
+
+Gear animation framework (src/styles/gearAnimations.css):
+- .gear — Base gear element. Declares rotation animation and GPU hints. Requires custom properties to control speed/direction/initial rotation.
+  - Custom properties used:
+    - --gear-rotation-speed (defaults to 10s)
+    - --gear-rotation-direction (normal | reverse)
+    - --gear-initial-rotation (angle used when snapping during reset)
+- .gear.running — Toggles animation-play-state: running to start continuous rotation.
+- .gear.resetting — Applies animation: none and transform to snap to --gear-initial-rotation; intended for brief application during reset sequence.
+- .gear-demo — Visual demo disc used in examples; provides size and decorative styling for demo gears.
+
+Recommended markup example:
+
+```html
+<div class="control-bar">
+  <button class="steampunk-btn">Start</button>
+  <button class="steampunk-btn">Pause</button>
+  <button class="steampunk-btn">Reset</button>
+</div>
+
+<div class="clock-face">
+  <section class="demo-row">
+    <div>
+      <div class="gear gear-demo" style="--gear-rotation-speed:8s; --gear-initial-rotation:0deg;"></div>
+      <div class="label--demo">Paused</div>
+    </div>
+  </section>
+</div>
+```
+
+4) CSS File Structure and Intent
+
+Follow the ordering and intent below to keep tokens available and styles predictable:
+
+- src/styles/theme.css
+  - Purpose: global tokens (colors, shadows, fonts), element defaults, small utilities (e.g., .panel, .label).
+  - Should be loaded first so tokens are available to downstream files.
+
+- src/styles/components.css
+  - Purpose: component and layout-level styles (buttons, control-bar, clock-face, demo helpers, responsive rules).
+  - Contains the primary CSS classes used by components and markup.
+
+- src/styles/gearAnimations.css
+  - Purpose: isolated animation framework for gears: keyframes, .gear base rules, modifying classes (.running, .resetting).
+  - Keep animation-specific rules here so they remain reusable and independent from component visuals.
+
+Recommended load order in HTML / app shell:
+1. theme.css
+2. components.css
+3. gearAnimations.css
+
+5) Notes on Integration and Behavior
+
+- Gears start paused by default (animation-play-state: paused). Use .running to enable rotation.
+- Reset behavior uses .gear.resetting plus a forced reflow (void el.offsetWidth) in the controller to snap to --gear-initial-rotation.
+- All animation tuning should prefer per-element custom properties over changing global CSS when possible.
+
+6) Verification / Testing (Manual)
+
+- Open README.md in a markdown viewer and confirm tables, headings, and code fences render correctly.
+- Cross-check documented variables and classes with these files:
+  - src/styles/theme.css
+  - src/styles/components.css
+  - src/styles/gearAnimations.css
+- Confirm token names and hex values match the source files.
+
+---
+
 CSS Animation Framework
 
 Overview
