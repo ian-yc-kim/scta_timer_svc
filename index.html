@@ -5,45 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Steampunk Timer - Gear Animation Demo</title>
     <link rel="stylesheet" href="/src/styles/theme.css" />
+    <link rel="stylesheet" href="/src/styles/components.css" />
     <link rel="stylesheet" href="/src/styles/gearAnimations.css" />
-    <style>
-      /* Minimal demo visuals - inline so animation CSS remains focused */
-      .demo-row { display: flex; gap: 24px; align-items: center; padding: 24px; }
-      .gear-demo { width: 96px; height: 96px; border-radius: 50%;
-                  border: 8px solid #6b4f2b; background: radial-gradient(circle at 30% 30%, #a07a4b, #6b4f2b);
-                  box-shadow: 0 4px 0 rgba(0,0,0,0.15) inset; display:flex; align-items:center; justify-content:center; }
-      .label { font-family: var(--font-body); font-size: 14px; color:var(--color-brown-light); }
-      .control-bar { display:flex; gap:12px; padding: 0 24px 24px 24px; }
-      .control-bar button { padding:8px 12px; font-size:14px; }
-    </style>
+    <!-- Inline demo styles removed; moved to components.css for maintainability -->
   </head>
   <body>
     <main>
-      <h1 style="padding: 24px;">Gear Animation Demo</h1>
+      <header>
+        <h1 class="page-title">Gear Animation Demo</h1>
+      </header>
 
-      <div class="control-bar">
-        <button id="start-btn" type="button">Start</button>
-        <button id="pause-btn" type="button">Pause</button>
-        <button id="reset-btn" type="button">Reset</button>
-      </div>
-
-      <section class="demo-row">
-        <!-- Default: paused gear (no running class) -->
-        <div>
-          <div class="gear gear-demo" style="--gear-rotation-speed: 8s; --gear-rotation-direction: normal; --gear-initial-rotation: 0deg;"></div>
-          <div class="label">Paused (default)</div>
+      <section aria-label="Timer controls">
+        <div class="control-bar">
+          <button class="steampunk-btn" id="start-btn" type="button">Start</button>
+          <button class="steampunk-btn" id="pause-btn" type="button">Pause</button>
+          <button class="steampunk-btn" id="reset-btn" type="button">Reset</button>
         </div>
+      </section>
 
-        <!-- Running gear: demonstrates GPU-accelerated continuous rotation -->
-        <div>
-          <div class="gear running gear-demo" style="--gear-rotation-speed: 4s; --gear-rotation-direction: reverse;"></div>
-          <div class="label">Running (fast, reverse)</div>
-        </div>
+      <section aria-label="Clock face">
+        <div class="clock-face">
+          <section class="demo-row">
+            <!-- Default: paused gear (no running class) -->
+            <div>
+              <div class="gear gear-demo" style="--gear-rotation-speed: 8s; --gear-rotation-direction: normal; --gear-initial-rotation: 0deg;"></div>
+              <div class="label--demo">Paused (default)</div>
+            </div>
 
-        <!-- Resetting gear: snaps to initial rotation -->
-        <div>
-          <div class="gear resetting gear-demo" style="--gear-initial-rotation: 45deg; --gear-rotation-speed: 12s;"></div>
-          <div class="label">Resetting (snapped)</div>
+            <!-- Running gear: demonstrates GPU-accelerated continuous rotation -->
+            <div>
+              <div class="gear running gear-demo" style="--gear-rotation-speed: 4s; --gear-rotation-direction: reverse;"></div>
+              <div class="label--demo">Running (fast, reverse)</div>
+            </div>
+
+            <!-- Resetting gear: snaps to initial rotation -->
+            <div>
+              <div class="gear resetting gear-demo" style="--gear-initial-rotation: 45deg; --gear-rotation-speed: 12s;"></div>
+              <div class="label--demo">Resetting (snapped)</div>
+            </div>
+          </section>
         </div>
       </section>
     </main>
