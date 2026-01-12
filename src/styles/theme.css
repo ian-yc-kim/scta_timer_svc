@@ -1,0 +1,73 @@
+:root {
+  /* Core palette */
+  --color-brown: #8B4513;
+  --color-brown-dark: #60320d;
+  --color-brown-light: #b07a46;
+
+  --color-gold: #FFD700;
+  --color-gold-muted: #d4b300;
+  --color-gold-dark: #b38f00;
+
+  --color-copper: #B87333;
+  --color-copper-dark: #874b20;
+  --color-copper-light: #d29a6b;
+
+  /* accents / shadows */
+  --shadow-deep: 0 8px 24px rgba(0,0,0,0.6);
+  --shadow-soft: 0 4px 12px rgba(0,0,0,0.45);
+  --highlight-warm: rgba(255, 230, 150, 0.12);
+
+  /* Fonts (web-safe serif fallback stack) */
+  --font-body: 'Courier Prime', Georgia, 'Times New Roman', serif;
+  --font-heading: Georgia, 'Courier Prime', serif;
+}
+
+/* Global resets and sensible defaults */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--color-gold-muted, #d4b300);
+  font-family: var(--font-body);
+  line-height: 1.45;
+
+  /* Antique textured background: layered gradients to simulate aged metal/parchment */
+  background-color: #2a1f18; /* dark base */
+  background-image:
+    radial-gradient(at 10% 20%, rgba(255,230,150,0.03), transparent 10%),
+    radial-gradient(at 80% 80%, rgba(0,0,0,0.18), transparent 25%),
+    linear-gradient(180deg, rgba(40,30,22,0.85), rgba(20,14,10,0.95));
+
+  /* subtle texture overlay using repeating-linear-gradient */
+  background-blend-mode: overlay, overlay, normal;
+  background-attachment: fixed;
+
+  /* Provide subtle vignette */
+  box-shadow: inset 0 120px 160px rgba(0,0,0,0.45), inset 0 -60px 120px rgba(0,0,0,0.35);
+}
+
+/* Headings should feel classical */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+  color: var(--color-gold, #FFD700);
+  margin: 0 0 12px 0;
+}
+
+/* Labels and small text use the body font but slightly muted */
+.label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-brown-light, #b07a46);
+}
+
+/* Utility: warm panels */
+.panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  border: 1px solid rgba(255, 220, 120, 0.06);
+  box-shadow: var(--shadow-soft);
+  padding: 12px;
+  border-radius: 6px;
+}

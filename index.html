@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Steampunk Timer - Gear Animation Demo</title>
+    <link rel="stylesheet" href="/src/styles/theme.css" />
     <link rel="stylesheet" href="/src/styles/gearAnimations.css" />
     <style>
       /* Minimal demo visuals - inline so animation CSS remains focused */
@@ -11,14 +12,14 @@
       .gear-demo { width: 96px; height: 96px; border-radius: 50%;
                   border: 8px solid #6b4f2b; background: radial-gradient(circle at 30% 30%, #a07a4b, #6b4f2b);
                   box-shadow: 0 4px 0 rgba(0,0,0,0.15) inset; display:flex; align-items:center; justify-content:center; }
-      .label { font-family: system-ui, sans-serif; font-size: 14px; color:#333; }
+      .label { font-family: var(--font-body); font-size: 14px; color:var(--color-brown-light); }
       .control-bar { display:flex; gap:12px; padding: 0 24px 24px 24px; }
       .control-bar button { padding:8px 12px; font-size:14px; }
     </style>
   </head>
   <body>
     <main>
-      <h1 style="font-family: system-ui, sans-serif; padding: 24px;">Gear Animation Demo</h1>
+      <h1 style="padding: 24px;">Gear Animation Demo</h1>
 
       <div class="control-bar">
         <button id="start-btn" type="button">Start</button>
