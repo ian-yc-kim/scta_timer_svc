@@ -3,16 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Steampunk Timer - Gear Animation Demo</title>
+    <title>Steampunk Timer</title>
     <link rel="stylesheet" href="/src/styles/theme.css" />
     <link rel="stylesheet" href="/src/styles/components.css" />
     <link rel="stylesheet" href="/src/styles/gearAnimations.css" />
-    <!-- Inline demo styles removed; moved to components.css for maintainability -->
   </head>
   <body>
     <main>
       <header>
-        <h1 class="page-title">Gear Animation Demo</h1>
+        <h1 class="page-title">Steampunk Timer</h1>
       </header>
 
       <section aria-label="Timer controls">
@@ -25,25 +24,17 @@
 
       <section aria-label="Clock face">
         <div class="clock-face">
-          <section class="demo-row">
-            <!-- Default: paused gear (no running class) -->
-            <div>
-              <div class="gear gear-demo" style="--gear-rotation-speed: 8s; --gear-rotation-direction: normal; --gear-initial-rotation: 0deg;"></div>
-              <div class="label--demo">Paused (default)</div>
-            </div>
+          <!-- Decorative background gears (keep .gear class for GearAnimationController) -->
+          <div class="gear gear-bg gear-bg--1" style="--gear-rotation-speed:10s; --gear-rotation-direction:normal; --gear-initial-rotation:0deg;"></div>
+          <div class="gear gear-bg gear-bg--2" style="--gear-rotation-speed:7s; --gear-rotation-direction:reverse; --gear-initial-rotation:12deg;"></div>
+          <div class="gear gear-bg gear-bg--3" style="--gear-rotation-speed:14s; --gear-rotation-direction:normal; --gear-initial-rotation:270deg;"></div>
 
-            <!-- Running gear: demonstrates GPU-accelerated continuous rotation -->
-            <div>
-              <div class="gear running gear-demo" style="--gear-rotation-speed: 4s; --gear-rotation-direction: reverse;"></div>
-              <div class="label--demo">Running (fast, reverse)</div>
-            </div>
-
-            <!-- Resetting gear: snaps to initial rotation -->
-            <div>
-              <div class="gear resetting gear-demo" style="--gear-initial-rotation: 45deg; --gear-rotation-speed: 12s;"></div>
-              <div class="label--demo">Resetting (snapped)</div>
-            </div>
-          </section>
+          <!-- Clock hands layer centered inside the clock face -->
+          <div id="clock-hands" aria-hidden="true">
+            <div class="hand hour-hand"></div>
+            <div class="hand minute-hand"></div>
+            <div class="center-cap" aria-hidden="true"></div>
+          </div>
         </div>
       </section>
     </main>
